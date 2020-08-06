@@ -1,4 +1,4 @@
-line-bot-sdk==20.1.1
+line-bot-sdk==1.8.0
 future==0.16.0
 requests==2.14.2
 Flask== 1.0.2
