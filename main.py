@@ -1,4 +1,5 @@
-from flask import Flask, abort, request
+from flask import Flask, request, abort
+
 from linebot import (
     LineBotApi, WebhookHandler
 )
@@ -12,12 +13,13 @@ import os
 
 app = Flask(__name__)
 
-# 環境変数取得
-YOUR_CHANNEL_ACCESS_TOKEN = os.environ["YOUR_CHANNEL_ACCESS_TOKEN"]
-YOUR_CHANNEL_SECRET = os.environ["YOUR_CHANNEL_SECRET"]
+line_bot_api = LineBotApi('35F33AoMvSMrROjy3XOXQ+Wr6kDjo03e7P+OTqRtC3jKLpGVrxYeXY4kBI7d8liX8G1zZoZm6FjQzaub0yXxq+MLC5eZXH5to+sxNRMfHJvlpFDoeRAcKYHRCrv52HqpLtDmU06HkoYqYTmOc0fEjgdB04t89/1O/w1cDnyilFU=')
+handler = WebhookHandler('a008bc253cdb2a5ab7136d75cad3834e')
 
-line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
-handler = WebhookHandler(YOUR_CHANNEL_SECRET)
+
+@app.route("/")
+def hello_world():
+    return "hello world!"
 
 
 @app.route("/callback", methods=['POST'])
@@ -47,5 +49,5 @@ def handle_message(event):
 
 if __name__ == "__main__":
     # app.run()
-    port = int(os.getenv("PORT", 5000))
+    port = int(os.getenv("PORT"))
     app.run(host="0.0.0.0", port=port)
